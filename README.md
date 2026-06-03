@@ -79,7 +79,7 @@ OPENAI_API_KEY=your_api_key
 
 1. Clone Repository
 
-git clone https://github.com/your-username/smart-notes-api.git
+git clone https://github.com/jeevan-kaware/smart-notes-api.git
 
 2. Configure Environment Variables
 
