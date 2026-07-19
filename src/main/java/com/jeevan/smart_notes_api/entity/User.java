@@ -11,11 +11,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
     @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @JsonIgnore
     @Column(nullable = false)
@@ -27,10 +27,10 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String username, String password, String role) {
+    public User(Long id, String username,String email, String password, String role) {
         this.id = id;
-        this.name = name;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.role = role;
     }
@@ -39,12 +39,20 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -55,13 +63,7 @@ public class User {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public void setPassword(String password) {
         this.password = password;

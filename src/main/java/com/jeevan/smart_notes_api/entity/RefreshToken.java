@@ -11,20 +11,22 @@ public class RefreshToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false, unique = true)
     private String token;
 
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String email;
 
+    @Column(nullable = false)
     private Date expiryDate;
 
     public RefreshToken() {
     }
 
-    public RefreshToken(Long id, String token, String username, Date expiryDate) {
+    public RefreshToken(Long id, String token, String email, Date expiryDate) {
         this.id = id;
         this.token = token;
-        this.username = username;
+        this.email = email;
         this.expiryDate = expiryDate;
     }
 
@@ -36,9 +38,6 @@ public class RefreshToken {
         return token;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
     public Date getExpiryDate() {
         return expiryDate;
@@ -48,13 +47,18 @@ public class RefreshToken {
         this.id = id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setToken(String token) {
         this.token = token;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;

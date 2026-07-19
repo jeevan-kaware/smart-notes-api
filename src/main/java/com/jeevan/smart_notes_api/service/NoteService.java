@@ -1,7 +1,7 @@
 package com.jeevan.smart_notes_api.service;
 
-import com.jeevan.smart_notes_api.dto.NoteRequest;
-import com.jeevan.smart_notes_api.dto.NoteResponse;
+import com.jeevan.smart_notes_api.dto.request.NoteRequest;
+import com.jeevan.smart_notes_api.dto.response.NoteResponse;
 import com.jeevan.smart_notes_api.entity.Note;
 import com.jeevan.smart_notes_api.entity.User;
 import com.jeevan.smart_notes_api.exception.ResourceNotFoundException;
@@ -37,10 +37,10 @@ public class NoteService {
     private AiService aiService;
 
     public Note create(NoteRequest request,
-                       String name) {
+                       String email) {
 
         User user = userRepository
-                .findByUsername(name)
+                .findByEmail(email)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("User not found"));
 
@@ -55,9 +55,9 @@ public class NoteService {
         return repository.save(note);
     }
 
-    public List<NoteResponse> getAll(String username) {
+    public List<NoteResponse> getAll(String email) {
 
-        return repository.findByUserUsername(username)
+        return repository.findByUserEmail(email)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
@@ -66,12 +66,12 @@ public class NoteService {
     public Note update(
             Long id,
             NoteRequest newNote,
-            String username) {
+            String email) {
 
         Note note = repository
-                .findByIdAndUserUsername(
+                .findByIdAndUserEmail(
                         id,
-                        username
+                        email
                 )
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -91,12 +91,12 @@ public class NoteService {
 
     public void delete(
             Long id,
-            String username) {
+            String email) {
 
         Note note = repository
-                .findByIdAndUserUsername(
+                .findByIdAndUserEmail(
                         id,
-                        username
+                        email
                 )
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -108,12 +108,12 @@ public class NoteService {
 
     public NoteResponse getById(
             Long id,
-            String username) {
+            String email) {
 
         Note note = repository
-                .findByIdAndUserUsername(
+                .findByIdAndUserEmail(
                         id,
-                        username
+                        email
                 )
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -125,11 +125,11 @@ public class NoteService {
 
     public List<NoteResponse> search(
             String title,
-            String username
+            String email
     ) {
 
         return repository
-                .findByUserUsername(username)
+                .findByUserEmail(email)
                 .stream()
                 .filter(note ->
                         note.getTitle()
@@ -143,11 +143,11 @@ public class NoteService {
     public Page<NoteResponse> getNotes(
             int page,
             int size,
-            String username) {
+            String email) {
 
         return repository
-                .findByUserUsername(
-                        username,
+                .findByUserEmail(
+                        email,
                         PageRequest.of(page, size)
                 )
                 .map(this::mapToResponse);
@@ -155,7 +155,7 @@ public class NoteService {
 
     public List<NoteResponse> sort(
             String field,
-            String username) {
+            String email) {
         List<String> allowedFields =
                 List.of(
                         "id",
@@ -169,8 +169,8 @@ public class NoteService {
             );
         }
         return repository
-                .findByUserUsername(
-                        username,
+                .findByUserEmail(
+                        email,
                         Sort.by(field)
                 )
                 .stream()
@@ -182,7 +182,7 @@ public class NoteService {
             int page,
             int size,
             String field,
-            String username) {
+            String email) {
         List<String> allowedFields =
                 List.of(
                         "id",
@@ -196,8 +196,8 @@ public class NoteService {
             );
         }
         return repository
-                .findByUserUsername(
-                        username,
+                .findByUserEmail(
+                        email,
                         PageRequest.of(
                                 page,
                                 size,
@@ -209,9 +209,9 @@ public class NoteService {
 
     public List<NoteResponse> filter(
             String keyword,
-            String username) {
+            String email) {
 
-        return repository.findByUserUsername(username)
+        return repository.findByUserEmail(email)
                 .stream()
                 .filter(note ->
                         note.getTitle()
@@ -221,9 +221,9 @@ public class NoteService {
                 .toList();
     }
     public List<NoteResponse> latestNotes(
-            String username) {
+            String email) {
 
-        return repository.findByUserUsername(username)
+        return repository.findByUserEmail(email)
                 .stream()
                 .sorted((a, b) ->
                         b.getCreatedAt()
@@ -233,14 +233,14 @@ public class NoteService {
     }
 
     public List<NoteResponse> myNotes(
-            String username) {
+            String email) {
 
-        return repository.findByUserUsername(username)
+        return repository.findByUserEmail(email)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
     }
-    public String uploadAndSummarize(MultipartFile file, String username) {
+    public String uploadAndSummarize(MultipartFile file, String email) {
         try {
             String uploadDir = "uploads/";
             Files.createDirectories(Paths.get(uploadDir));
@@ -255,7 +255,7 @@ public class NoteService {
             note.setTitle("Summary: " + fileName);
             note.setContent(summary);
             User user = userRepository
-                    .findByUsername(username)
+                    .findByEmail(email)
                     .orElseThrow(() ->
                             new ResourceNotFoundException(
                                     "User not found"
@@ -270,8 +270,8 @@ public class NoteService {
         }
     }
 
-    public byte[] generateNotePdf(Long noteId, String username) {
-        Note note = repository.findByIdAndUserUsername(noteId, username)
+    public byte[] generateNotePdf(Long noteId, String email) {
+        Note note = repository.findByIdAndUserEmail(noteId, email)
                 .orElseThrow(() -> new ResourceNotFoundException("Note not found"));
 
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {

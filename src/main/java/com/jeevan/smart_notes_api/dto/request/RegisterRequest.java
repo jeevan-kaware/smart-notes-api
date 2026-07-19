@@ -1,19 +1,27 @@
-package com.jeevan.smart_notes_api.dto;
+package com.jeevan.smart_notes_api.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginRequest {
-    @NotBlank(message = "Username is required")
+public class RegisterRequest {
+    @NotBlank(message = "Name is required")
     private String username;
+
+    @NotBlank(message = "Email is required")
+    private String email;
+
     @NotBlank(message = "Password is required")
     private String password;
 
-    public LoginRequest() {
+
+    public RegisterRequest() {
     }
 
-    public LoginRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {

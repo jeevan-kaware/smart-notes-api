@@ -1,4 +1,4 @@
-package com.jeevan.smart_notes_api.security;
+package com.jeevan.smart_notes_api.security.UserDetails;
 
 import com.jeevan.smart_notes_api.entity.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,11 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class UserPrincipl implements UserDetails {
+
+public class UserPrincipal implements UserDetails {
 
     private User user;
 
-    public UserPrincipl(User user) {
+    public UserPrincipal(User user) {
         this.user = user;
     }
 
@@ -30,7 +31,7 @@ public class UserPrincipl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
     }
 
     @Override

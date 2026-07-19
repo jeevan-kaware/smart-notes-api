@@ -1,4 +1,4 @@
-package com.jeevan.smart_notes_api.dto;
+package com.jeevan.smart_notes_api.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

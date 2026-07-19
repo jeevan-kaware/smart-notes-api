@@ -1,9 +1,9 @@
 package com.jeevan.smart_notes_api.controller;
 
-import com.jeevan.smart_notes_api.dto.AuthResponse;
-import com.jeevan.smart_notes_api.dto.LoginRequest;
-import com.jeevan.smart_notes_api.dto.RefreshTokenRequest;
-import com.jeevan.smart_notes_api.dto.RegisterRequest;
+import com.jeevan.smart_notes_api.dto.response.AuthResponse;
+import com.jeevan.smart_notes_api.dto.request.LoginRequest;
+import com.jeevan.smart_notes_api.dto.request.RefreshTokenRequest;
+import com.jeevan.smart_notes_api.dto.request.RegisterRequest;
 import com.jeevan.smart_notes_api.entity.User;
 import com.jeevan.smart_notes_api.service.AuthService;
 import jakarta.validation.Valid;

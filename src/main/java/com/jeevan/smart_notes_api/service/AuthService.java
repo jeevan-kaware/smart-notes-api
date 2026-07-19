@@ -1,11 +1,12 @@
 package com.jeevan.smart_notes_api.service;
 
-import com.jeevan.smart_notes_api.dto.AuthResponse;
-import com.jeevan.smart_notes_api.dto.LoginRequest;
-import com.jeevan.smart_notes_api.dto.RegisterRequest;
+import com.jeevan.smart_notes_api.dto.response.AuthResponse;
+import com.jeevan.smart_notes_api.dto.request.LoginRequest;
+import com.jeevan.smart_notes_api.dto.request.RegisterRequest;
 import com.jeevan.smart_notes_api.entity.RefreshToken;
 import com.jeevan.smart_notes_api.entity.User;
 import com.jeevan.smart_notes_api.repository.UserRepository;
+import com.jeevan.smart_notes_api.security.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,18 +36,14 @@ public class AuthService {
 
     public User register(RegisterRequest request) {
 
-        if(repository.findByUsername(
-                request.getUsername()).isPresent()) {
-
-            throw new RuntimeException(
-                    "Username already exists"
-            );
+        if(repository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
         }
 
         User user = new User();
-        user.setName(request.getName());
-
         user.setUsername(request.getUsername());
+
+        user.setEmail(request.getEmail());
 
         user.setPassword(
                 encoder.encode(request.getPassword())
@@ -62,7 +59,7 @@ public class AuthService {
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
-                                request.getUsername(),
+                                request.getEmail(),
                                 request.getPassword()
                         )
                 );
@@ -71,13 +68,13 @@ public class AuthService {
 
             String accessToken =
                     jwtService.generateToken(
-                            request.getUsername()
+                            request.getEmail()
                     );
 
             String refreshToken =
                     refreshTokenService
                             .createRefreshToken(
-                                    request.getUsername()
+                                    request.getEmail()
                             )
                             .getToken();
 
@@ -98,7 +95,7 @@ public class AuthService {
 
         String accessToken =
                 jwtService.generateToken(
-                        refreshToken.getUsername()
+                        refreshToken.getEmail()
                 );
 
         return new AuthResponse(

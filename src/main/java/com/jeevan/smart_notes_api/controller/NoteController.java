@@ -1,7 +1,7 @@
 package com.jeevan.smart_notes_api.controller;
 
-import com.jeevan.smart_notes_api.dto.NoteRequest;
-import com.jeevan.smart_notes_api.dto.NoteResponse;
+import com.jeevan.smart_notes_api.dto.request.NoteRequest;
+import com.jeevan.smart_notes_api.dto.response.NoteResponse;
 import com.jeevan.smart_notes_api.entity.Note;
 import com.jeevan.smart_notes_api.service.NoteService;
 import jakarta.validation.Valid;

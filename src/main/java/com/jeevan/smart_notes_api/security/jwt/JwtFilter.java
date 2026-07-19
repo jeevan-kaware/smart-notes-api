@@ -1,7 +1,6 @@
-package com.jeevan.smart_notes_api.security;
+package com.jeevan.smart_notes_api.security.jwt;
 
-import com.jeevan.smart_notes_api.service.CustomerUserDetails;
-import com.jeevan.smart_notes_api.service.JwtService;
+import com.jeevan.smart_notes_api.security.UserDetails.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,19 +34,19 @@ public class JwtFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         String token = null;
-        String username = null;
+        String email = null;
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
-            username = service.extractUserName(token);
+            email = service.extractUserName(token);
         }
 
-        if (username != null
+        if (email != null
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = context
-                    .getBean(CustomerUserDetails.class)
-                    .loadUserByUsername(username);
+                    .getBean(CustomUserDetailsService.class)
+                    .loadUserByUsername(email);
 
             if (service.validateToken(token, userDetails)) {
 

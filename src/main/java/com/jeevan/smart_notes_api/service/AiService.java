@@ -12,7 +12,6 @@ public class AiService {
         this.chatClient = builder.build();
     }
 
-    // TEXT SUMMARY
     public String summarize(String text) {
 
         return chatClient.prompt()
@@ -40,7 +39,7 @@ public class AiService {
                 .content();
     }
 
-    // TITLE GENERATOR
+
     public String generateTitle(String text) {
 
         return chatClient.prompt()
@@ -61,7 +60,7 @@ public class AiService {
                 .content();
     }
 
-    // FILE SUMMARY + USER PROMPT
+
     public String summarizeWithPrompt(
             String text,
             String userPrompt

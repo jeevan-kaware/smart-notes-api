@@ -15,11 +15,11 @@ public class RefreshTokenService {
     @Autowired
     private RefreshTokenRepository repository;
 
-    public RefreshToken createRefreshToken(String username) {
+    public RefreshToken createRefreshToken(String email) {
 
         RefreshToken token = new RefreshToken();
 
-        token.setUsername(username);
+        token.setEmail(email);
         token.setToken(UUID.randomUUID().toString());
         token.setExpiryDate(
                 new Date(System.currentTimeMillis()
