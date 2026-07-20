@@ -533,6 +533,9 @@ The following screenshots demonstrate the complete workflow of the Smart Notes A
 ![Update Note](Screenshots/07-update-note.png)
 
 ---
+## 🔍 Search Notes
+
+![Search Notes](Screenshots/08-search-note.png)
 
 ---
 
