@@ -534,10 +534,6 @@ The following screenshots demonstrate the complete workflow of the Smart Notes A
 
 ---
 
-## 🔍 Search Notes
-
-![Search Notes](Screenshots/08-search-note.png)
-
 ---
 
 ## 📄 Pagination
@@ -552,11 +548,6 @@ The following screenshots demonstrate the complete workflow of the Smart Notes A
 
 ---
 
-## ↕️ Sort Notes
-
-![Sort Notes](Screenshots/11-sort-notes.png)
-
----
 
 ## 🤖 AI Title Generation
 
