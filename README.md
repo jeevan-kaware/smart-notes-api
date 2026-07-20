@@ -44,7 +44,7 @@ Apart from standard CRUD operations, Smart Notes API integrates **Spring AI** to
 
 Users can also upload PDF documents, automatically extract their text, generate AI-powered summaries, create AI-generated titles and download notes as PDF files.
 
-The project follows a clean layered architecture using Spring Boot best practices and is designed as a backend-first application. A frontend can easily be integrated in the future.
+The project follows a clean layered architecture and backend-first design. A frontend application can be integrated in the future to build a complete AI-powered Notes Management Platform.
 
 The application uses **Neon PostgreSQL** as the database and **Swagger OpenAPI** for API documentation and testing.
 
@@ -81,20 +81,19 @@ The application uses **Neon PostgreSQL** as the database and **Swagger OpenAPI**
 
 ## 🤖 AI Features
 
-- AI Text Summary
 - AI Title Generation
 - AI Custom Prompt Summary
-- AI PDF Summary
-- AI PDF Title Generation
+- AI-powered PDF Summary
+- AI-powered PDF Title Generation
 
 ---
 
 ## 📄 PDF Features
 
 - Upload PDF File
-- Extract PDF Text
+- Extract Text from PDF
 - Generate AI Summary from PDF
-- Generate AI Title from PDF
+- Generate AI-powered Title from PDF
 - Download Note as PDF
 
 ---
@@ -105,7 +104,7 @@ The application uses **Neon PostgreSQL** as the database and **Swagger OpenAPI**
 - JWT Authentication
 - Refresh Token Authentication
 - Stateless Authentication
-- Protected REST APIs
+- JWT Protected REST APIs
 
 ---
 
@@ -146,7 +145,7 @@ PostgreSQL Database
 
 The project uses secure JWT Authentication.
 
-Every protected API requires
+Every protected endpoint requires:
 
 ```text
 Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -207,7 +206,7 @@ Features included
 - JWT Access Token Authentication
 - Refresh Token Authentication
 - BCrypt Password Encryption
-- Spring Security Filter Chain
+- Spring Security Filter Chain Configuration
 - Custom UserDetailsService
 - Stateless Session Management
 - Email Based Authentication
@@ -243,7 +242,7 @@ src
 
 The application uses **Neon PostgreSQL**.
 
-Main Tables
+Primary Tables
 
 - users
 - notes
@@ -303,7 +302,7 @@ The APIs have been tested using
 - Browser (Swagger UI)
 - Postman
 
-Every protected API requires a valid JWT Bearer Token.
+All secured endpoints require a valid JWT Bearer Token.
 
 ---
 
@@ -467,7 +466,7 @@ Available Features
 - Swagger Documentation
 - Bean Validation
 - Exception Handling
-- Production Ready Project Structure
+- Production-ready Project Structure
 
 ---
 
@@ -545,12 +544,17 @@ The following screenshots demonstrate the complete workflow of the Smart Notes A
 
 ---
 
+## 🔃 Sort Notes
+
+![SortNotes](Screenshots/11-sort-notes.png)
+
+--
+
 ## 📥 Download Note as PDF
 
 ![Download PDF](Screenshots/10-download-pdf.png)
 
 ---
-
 
 ## 🤖 AI Title Generation
 
@@ -609,7 +613,7 @@ This project helped me gain practical experience with
 - Spring Security
 - JWT Authentication
 - Refresh Token Flow
-- Spring AI
+- Spring AI Integration
 - OpenAI Integration
 - AI Prompt Engineering
 - REST API Development
