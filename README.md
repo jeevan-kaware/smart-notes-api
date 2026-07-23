@@ -49,7 +49,21 @@ The project follows a clean layered architecture and backend-first design. A fro
 The application uses **Neon PostgreSQL** as the database and **Swagger OpenAPI** for API documentation and testing.
 
 ---
+---
 
+# 🌐 Live Demo
+
+## 🚀API Base URL
+
+https://smart-notes-api-production.up.railway.app
+
+---
+
+## 📚 Swagger UI
+
+https://smart-notes-api-production.up.railway.app/swagger-ui/index.html#/
+
+---
 # ✨ Features
 
 ## 🔐 Authentication
